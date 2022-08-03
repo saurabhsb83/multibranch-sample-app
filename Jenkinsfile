@@ -1,21 +1,11 @@
+Jenkinsfile (Declarative Pipeline)
 pipeline {
-  agent {label 'master'}
-  options {
-    buildDiscarder(logRotator(numToKeepStr: '5'))
-  }
-  stages {
-    stage('Build') {
-      steps {
-        sh './gradlew clean check --no-daemon'
-      }
+    agent { docker { image 'maven:3.8.4-openjdk-11-slim' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn --version'
+            }
+        }
     }
-  }
-  post {
-    always {
-        junit(
-          allowEmptyResults: true, 
-          testResults: '**/build/test-results/test/*.xml'
-        )
-    }
-  }
 }
