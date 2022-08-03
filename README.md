@@ -1,3 +1,3 @@
 # multibranch-sample-app
 
-add content
+This is the default README file for multibranch-sample-app
